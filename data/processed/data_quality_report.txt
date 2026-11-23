@@ -1,0 +1,110 @@
+========================================================================
+YOUTUBE CREATOR BENCHMARK: DATA QUALITY REPORT
+========================================================================
+Generated: 2026-11-23 19:32:54
+
+SOURCE FILES (raw, read-only)
+  creators_data.csv: 47 rows loaded (encoding: utf-8-sig)
+  videos_data.csv: 442 rows loaded (encoding: utf-8-sig)
+  collection_log.csv: 98 rows loaded (encoding: utf-8-sig)
+
+OUTPUT FILES
+  cleaned_creators.csv: 47 rows
+  cleaned_videos.csv: 442 rows
+
+1. ROW COUNTS
+  Creators: 47 loaded, 0 repeated ID row(s) removed, 47 kept
+  Videos: 442 loaded, 0 repeated ID row(s) removed, 442 kept
+  Collection log: 98 loaded, all kept
+
+2. CLEANING AND CHECK LOG
+  [Videos]
+    - Column 'format' not found in file. Treated as entirely missing (no values invented).
+    - OK: no repeated video_id values.
+    - views: 0 blank value(s) left as missing (not filled).
+    - likes: 0 blank value(s) left as missing (not filled).
+    - comments: 0 blank value(s) left as missing (not filled).
+    - OK: all non-blank values in upload_date parsed as dates.
+  [Collection log]
+    - Column 'error_message' not found in file. Treated as entirely missing (no values invented).
+    - OK: no exact duplicate log rows.
+    - OK: all non-blank values in collected_at parsed as dates.
+  [Creators]
+    - OK: no repeated creator_id values.
+    - subscriber_count: 0 blank value(s) left as missing (not filled).
+  [Cleaning]
+    - Niche labels not in NICHE_MAP (tidied only, kept): ['Entertainment']
+  [Creator checks]
+    - OK: no rows flagged as missing_subscriber_count.
+    - OK: no rows flagged as zero_subscribers.
+    - OK: no rows flagged as negative_subscribers.
+  [Video checks]
+    - OK: no rows flagged as missing_views.
+    - OK: no rows flagged as missing_likes.
+    - OK: no rows flagged as missing_comments.
+    - FLAG zero_views: 1 row(s). IDs: ipZCIW7DNJo
+    - OK: no rows flagged as negative_value.
+    - FLAG likes_exceed_views: 1 row(s). IDs: ipZCIW7DNJo
+    - OK: no rows flagged as comments_exceed_views.
+    - OK: no rows flagged as missing_or_invalid_upload_date.
+    - OK: no rows flagged as future_upload_date.
+    - OK: no rows flagged as creator_not_in_creators_file.
+    - OK: no rows flagged as missing_creator_subscribers.
+    - OK: no rows flagged as zero_creator_subscribers.
+    - OK: no rows flagged as engagement_over_100pct.
+    - FLAG views_to_subscriber_over_1000pct_review: 1 row(s). IDs: 1Ogu5traH2o
+  [Coverage gaps]
+    - 4 creator ID(s) appear in video or log data but not in creators_data.csv: C021, C036, C041, C046
+
+3. CREATOR AND VIDEO COVERAGE
+  3a. Creators missing from creators_data.csv (4):
+    - C021
+    - C036
+    - C041
+    - C046
+  3b. Creators without videos (1):
+    - C047
+  3c. Creators with fewer than 10 videos (3):
+    - C047: 0 video(s)
+    - C034: 1 video(s)
+    - C043: 1 video(s)
+  Videos per creator (creators file): median 10.0, min 0, max 10
+
+4. COLLECTION LOG ANALYSIS
+  Total records: 98
+  success: 93
+  failed: 5
+  4a. Failed records (5):
+    - creator C021 | 2026-11-23 13:22 | no error message
+    - creator C036 | 2026-11-23 13:22 | no error message
+    - creator C041 | 2026-11-23 13:22 | no error message
+    - creator C046 | 2026-11-23 13:22 | no error message
+    - creator C047 | 2026-11-23 13:23 | no error message
+  4b. Creators with failed records and no successful record (4):
+    - C021
+    - C036
+    - C041
+    - C046
+  4c. Creators in creators file with no collection log entry (0):
+    None
+  4d. Creators in collection log but not in creators file (4):
+    - C021
+    - C036
+    - C041
+    - C046
+
+5. ROW-LEVEL FLAG SUMMARY: VIDEOS
+  Videos with at least one flag: 2 of 442
+    zero_views: 1
+    likes_exceed_views: 1
+    views_to_subscriber_over_1000pct_review: 1
+
+6. ROW-LEVEL FLAG SUMMARY: CREATORS
+  Creators with at least one flag: 0 of 47
+    No flags raised
+
+7. NOTES
+  - Flagged rows are kept in the cleaned outputs. Filter on quality_flags to exclude them.
+  - Missing values were left blank. No values were estimated or filled.
+  - Raw CSV files were not modified.
+========================================================================
